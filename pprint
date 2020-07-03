@@ -1,0 +1,17 @@
+/*
+DESCRIPTION
+
+    pprint
+
+    Pretty print any data, containers, pairs and tuples.
+
+VERSION
+
+    1.0.0
+
+LATEST UPDATE
+
+    2020.7.2
+*/
+
+#include "src/pprint.hpp"
