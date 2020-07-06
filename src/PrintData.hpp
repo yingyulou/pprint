@@ -16,6 +16,7 @@
 #include "CategoryTraits.h"
 #include "SubCategoryTraits.h"
 #include "PrintTuple.hpp"
+#include "Util.h"
 #include "Constants.h"
 
 namespace pprint
@@ -267,22 +268,22 @@ void __PrintData<__TupleTag, __CommonTag, T, N>::__Print(const T &val)
 template <typename SubTag, typename T, int N>
 void __PrintData<__StackTag, SubTag, T, N>::__Print(const T &val)
 {
-    T copyVal = val;
+    T reverseVal = __reverseStack(val);
 
     cout << string(N * __INDENTATION_LEN, __SPACE) << __STACK_BEGIN << endl;
 
-    while (!copyVal.empty())
+    while (!reverseVal.empty())
     {
         __PrintData<
             SubTag,
             typename __SubCategoryTraits<SubTag, typename T::value_type>::__Category,
             typename T::value_type,
             N + 1
-        >::__Print(copyVal.top());
+        >::__Print(reverseVal.top());
 
         cout << __LINE_END << endl;
 
-        copyVal.pop();
+        reverseVal.pop();
     }
 
     cout << string(N * __INDENTATION_LEN, __SPACE) << __STACK_END;
@@ -292,19 +293,19 @@ void __PrintData<__StackTag, SubTag, T, N>::__Print(const T &val)
 template <typename T, int N>
 void __PrintData<__StackTag, __CommonTag, T, N>::__Print(const T &val)
 {
-    T copyVal = val;
+    T reverseVal = __reverseStack(val);
 
     cout << string(N * __INDENTATION_LEN, __SPACE) << __STACK_BEGIN;
 
-    if (!copyVal.empty())
+    if (!reverseVal.empty())
     {
-        cout << copyVal.top();
-        copyVal.pop();
+        cout << reverseVal.top();
+        reverseVal.pop();
 
-        while (!copyVal.empty())
+        while (!reverseVal.empty())
         {
-            cout << __VALUE_SPLICE << copyVal.top();
-            copyVal.pop();
+            cout << __VALUE_SPLICE << reverseVal.top();
+            reverseVal.pop();
         }
     }
 

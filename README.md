@@ -179,14 +179,20 @@ sampleComplexStack.push({"abc", "def"});
 sampleComplexStack.push({"ghi", "jkl"});
 sampleComplexStack.push({"mno", "pqr"});
 
-print(sampleStack);  // [3, 2, 1]
+/*
+Bottom --------> Top
+       [1, 2, 3]
+*/
+print(sampleStack);
 
 /*
-[
-    [mno, pqr],
-    [ghi, jkl],
-    [abc, def],
-]
+                 Bottom
+[                  |
+    [abc, def],    |
+    [ghi, jkl],    |
+    [mno, pqr],    |
+]                  v
+                  Top
 */
 print(sampleComplexStack);
 ```
@@ -208,14 +214,20 @@ sampleComplexPriorityQueue.push({"abc", "def"});
 sampleComplexPriorityQueue.push({"ghi", "jkl"});
 sampleComplexPriorityQueue.push({"mno", "pqr"});
 
-print(sampleQueue);  // [1, 2, 3]
+/*
+Front <-------- Back
+      [1, 2, 3]
+*/
+print(sampleQueue);
 
 /*
-[
-    [mno, pqr],
-    [ghi, jkl],
-    [abc, def],
-]
+                 Front
+[                  ^
+    [mno, pqr],    |
+    [ghi, jkl],    |
+    [abc, def],    |
+]                  |
+                  Back
 */
 print(sampleComplexPriorityQueue);
 ```
