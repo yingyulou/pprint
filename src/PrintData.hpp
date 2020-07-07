@@ -314,24 +314,22 @@ void __PrintData<__StackTag, __CommonTag, T, N>::__Print(const T &val)
 
 
 template <typename SubTag, typename T, int N>
-void __PrintData<__QueueTag, SubTag, T, N>::__Print(const T &val)
+void __PrintData<__QueueTag, SubTag, T, N>::__Print(T val)
 {
-    T copyVal = val;
-
     cout << string(N * __INDENTATION_LEN, __SPACE) << __QUEUE_BEGIN << endl;
 
-    while (!copyVal.empty())
+    while (!val.empty())
     {
         __PrintData<
             SubTag,
             typename __SubCategoryTraits<SubTag, typename T::value_type>::__Category,
             typename T::value_type,
             N + 1
-        >::__Print(copyVal.front());
+        >::__Print(val.front());
 
         cout << __LINE_END << endl;
 
-        copyVal.pop();
+        val.pop();
     }
 
     cout << string(N * __INDENTATION_LEN, __SPACE) << __QUEUE_END;
@@ -339,21 +337,19 @@ void __PrintData<__QueueTag, SubTag, T, N>::__Print(const T &val)
 
 
 template <typename T, int N>
-void __PrintData<__QueueTag, __CommonTag, T, N>::__Print(const T &val)
+void __PrintData<__QueueTag, __CommonTag, T, N>::__Print(T val)
 {
-    T copyVal = val;
-
     cout << string(N * __INDENTATION_LEN, __SPACE) << __QUEUE_BEGIN;
 
-    if (!copyVal.empty())
+    if (!val.empty())
     {
-        cout << copyVal.front();
-        copyVal.pop();
+        cout << val.front();
+        val.pop();
 
-        while (!copyVal.empty())
+        while (!val.empty())
         {
-            cout << __VALUE_SPLICE << copyVal.front();
-            copyVal.pop();
+            cout << __VALUE_SPLICE << val.front();
+            val.pop();
         }
     }
 

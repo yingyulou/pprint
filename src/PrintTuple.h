@@ -24,7 +24,7 @@ struct __PrintTupleOneLine
 template <typename T, int TopIdx>
 struct __PrintTupleOneLine<T, TopIdx, TopIdx>
 {
-    static void __Print(const T &val);
+    static void __Print(const T &val) {}
 };
 
 
@@ -42,7 +42,7 @@ struct __PrintTupleMultiLine
 template <typename T, int N, int TopIdx>
 struct __PrintTupleMultiLine<T, N, TopIdx, TopIdx>
 {
-    static void __Print(const T &val);
+    static void __Print(const T &val) {}
 };
 
 

@@ -121,14 +121,14 @@ struct __PrintData<__StackTag, __CommonTag, T, N>
 template <typename SubTag, typename T, int N>
 struct __PrintData<__QueueTag, SubTag, T, N>
 {
-    static void __Print(const T &val);
+    static void __Print(T val);
 };
 
 
 template <typename T, int N>
 struct __PrintData<__QueueTag, __CommonTag, T, N>
 {
-    static void __Print(const T &val);
+    static void __Print(T val);
 };
 
 

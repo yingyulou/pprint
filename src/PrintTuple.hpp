@@ -46,10 +46,6 @@ void __PrintTupleOneLine<T, Idx, TopIdx>::__Print(const T &val)
 }
 
 
-template <typename T, int TopIdx>
-void __PrintTupleOneLine<T, TopIdx, TopIdx>::__Print(const T &val) {}
-
-
 ////////////////////////////////////////////////////////////////////////////////
 // Class __PrintTupleMultiLine
 ////////////////////////////////////////////////////////////////////////////////
@@ -76,10 +72,6 @@ void __PrintTupleMultiLine<T, N, Idx, TopIdx>::__Print(const T &val)
 
     __PrintTupleMultiLine<T, N, Idx + 1, TopIdx>::__Print(val);
 }
-
-
-template <typename T, int N, int TopIdx>
-void __PrintTupleMultiLine<T, N, TopIdx, TopIdx>::__Print(const T &val) {}
 
 
 }  // End namespace pprint
