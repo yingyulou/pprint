@@ -45,7 +45,7 @@ The ```Sequence Container``` is: ```array```, ```deque```, ```forward_list```, `
 ``` Cpp
 array<int, 3> sampleArray {1, 2, 3};
 vector<string> sampleVector {"abc", "def", "ghi"};
-list<deque<forward_list<string>>> sampleComplexContanier {{{"abc", "def"}, {"ghi", "jkl"}}, {{"mno", "pqr"}, {"stu", "vwx"}}};
+list<deque<forward_list<string>>> sampleComplexContainer {{{"abc", "def"}, {"ghi", "jkl"}}, {{"mno", "pqr"}, {"stu", "vwx"}}};
 
 print(sampleArray);   // [1, 2, 3]
 print(sampleVector);  // [abc, def, ghi]
