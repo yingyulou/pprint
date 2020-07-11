@@ -10,7 +10,7 @@
 #include <tuple>
 #include "CategoryTag.h"
 #include "CategoryTraits.h"
-#include "UpgradeCategoryTraits.h"
+#include "CategoryPromotionTraits.h"
 
 namespace pprint
 {
@@ -61,7 +61,7 @@ struct __SubCategoryTraits<__SetContainerTag, T>
 template <typename T>
 struct __SubCategoryTraits<__MapPairTag, T>
 {
-    typedef typename __UpgradeCategoryTraits<
+    typedef typename __CategoryPromotionTraits<
         typename __CategoryTraits<typename T::first_type>::__Category,
         typename __CategoryTraits<typename T::second_type>::__Category
     >::__Category __Category;
@@ -71,7 +71,7 @@ struct __SubCategoryTraits<__MapPairTag, T>
 template <typename T>
 struct __SubCategoryTraits<__PairTag, T>
 {
-    typedef typename __UpgradeCategoryTraits<
+    typedef typename __CategoryPromotionTraits<
         typename __CategoryTraits<typename T::first_type>::__Category,
         typename __CategoryTraits<typename T::second_type>::__Category
     >::__Category __Category;
@@ -81,7 +81,7 @@ struct __SubCategoryTraits<__PairTag, T>
 template <typename... Types>
 struct __SubCategoryTraits<__TupleTag, tuple<Types...>>
 {
-    typedef typename __UpgradeCategoryTraits<
+    typedef typename __CategoryPromotionTraits<
         typename __CategoryTraits<Types>::__Category...
     >::__Category __Category;
 };

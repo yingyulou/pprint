@@ -1,11 +1,11 @@
 /*
-    UpgradeCategoryTraits.h
-    =======================
+    CategoryPromotionTraits.h
+    =========================
         Upgrade category traits header.
 */
 
-#ifndef __PPRINT_UPGRADE_CATEGORY_TRAITS_H
-#define __PPRINT_UPGRADE_CATEGORY_TRAITS_H
+#ifndef __PPRINT_CATEGORY_PROMOTION_TRAITS_H
+#define __PPRINT_CATEGORY_PROMOTION_TRAITS_H
 
 #include "CategoryTag.h"
 
@@ -13,47 +13,47 @@ namespace pprint
 {
 
 ////////////////////////////////////////////////////////////////////////////////
-// Class __UpgradeCategoryTraits
+// Class __CategoryPromotionTraits
 ////////////////////////////////////////////////////////////////////////////////
 
 template <typename... Tags>
-struct __UpgradeCategoryTraits;
+struct __CategoryPromotionTraits;
 
 
 template <typename Tag1, typename Tag2>
-struct __UpgradeCategoryTraits<Tag1, Tag2>
+struct __CategoryPromotionTraits<Tag1, Tag2>
 {
     typedef Tag1 __Category;
 };
 
 
 template <typename Tag1>
-struct __UpgradeCategoryTraits<Tag1, __CommonTag>
+struct __CategoryPromotionTraits<Tag1, __CommonTag>
 {
     typedef Tag1 __Category;
 };
 
 
 template <typename Tag1>
-struct __UpgradeCategoryTraits<__CommonTag, Tag1>
+struct __CategoryPromotionTraits<__CommonTag, Tag1>
 {
     typedef Tag1 __Category;
 };
 
 
 template <>
-struct __UpgradeCategoryTraits<__CommonTag, __CommonTag>
+struct __CategoryPromotionTraits<__CommonTag, __CommonTag>
 {
     typedef __CommonTag __Category;
 };
 
 
 template <typename Tag1, typename... Tags>
-struct __UpgradeCategoryTraits<Tag1, Tags...>
+struct __CategoryPromotionTraits<Tag1, Tags...>
 {
-    typedef typename __UpgradeCategoryTraits<
+    typedef typename __CategoryPromotionTraits<
         Tag1,
-        typename __UpgradeCategoryTraits<Tags...>::__Category
+        typename __CategoryPromotionTraits<Tags...>::__Category
     >::__Category __Category;
 };
 
@@ -61,4 +61,4 @@ struct __UpgradeCategoryTraits<Tag1, Tags...>
 }  // End namespace pprint
 
 
-#endif  // __PPRINT_UPGRADE_CATEGORY_TRAITS_H
+#endif  // __PPRINT_CATEGORY_PROMOTION_TRAITS_H
