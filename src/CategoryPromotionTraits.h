@@ -34,10 +34,10 @@ struct __CategoryPromotionTraits<Tag1, __CommonTag>
 };
 
 
-template <typename Tag1>
-struct __CategoryPromotionTraits<__CommonTag, Tag1>
+template <typename Tag2>
+struct __CategoryPromotionTraits<__CommonTag, Tag2>
 {
-    typedef Tag1 __Category;
+    typedef Tag2 __Category;
 };
 
 
