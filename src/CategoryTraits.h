@@ -68,85 +68,85 @@ struct __CategoryTraits<array<T, N>>
 };
 
 
-template <typename T>
-struct __CategoryTraits<deque<T>>
+template <typename T, typename Alloc>
+struct __CategoryTraits<deque<T, Alloc>>
 {
     typedef __SequenceContainerTag __Category;
 };
 
 
-template <typename T>
-struct __CategoryTraits<forward_list<T>>
+template <typename T, typename Alloc>
+struct __CategoryTraits<forward_list<T, Alloc>>
 {
     typedef __SequenceContainerTag __Category;
 };
 
 
-template <typename T>
-struct __CategoryTraits<list<T>>
+template <typename T, typename Alloc>
+struct __CategoryTraits<list<T, Alloc>>
 {
     typedef __SequenceContainerTag __Category;
 };
 
 
-template <typename T>
-struct __CategoryTraits<vector<T>>
+template <typename T, typename Alloc>
+struct __CategoryTraits<vector<T, Alloc>>
 {
     typedef __SequenceContainerTag __Category;
 };
 
 
-template <typename K, typename V>
-struct __CategoryTraits<map<K, V>>
+template <typename K, typename V, typename Compare, typename Alloc>
+struct __CategoryTraits<map<K, V, Compare, Alloc>>
 {
     typedef __MapContainerTag __Category;
 };
 
 
-template <typename K, typename V>
-struct __CategoryTraits<multimap<K, V>>
+template <typename K, typename V, typename Compare, typename Alloc>
+struct __CategoryTraits<multimap<K, V, Compare, Alloc>>
 {
     typedef __MapContainerTag __Category;
 };
 
 
-template <typename K, typename V>
-struct __CategoryTraits<unordered_map<K, V>>
+template <typename K, typename V, typename Hash, typename Pred, typename Alloc>
+struct __CategoryTraits<unordered_map<K, V, Hash, Pred, Alloc>>
 {
     typedef __MapContainerTag __Category;
 };
 
 
-template <typename K, typename V>
-struct __CategoryTraits<unordered_multimap<K, V>>
+template <typename K, typename V, typename Hash, typename Pred, typename Alloc>
+struct __CategoryTraits<unordered_multimap<K, V, Hash, Pred, Alloc>>
 {
     typedef __MapContainerTag __Category;
 };
 
 
-template <typename T>
-struct __CategoryTraits<set<T>>
+template <typename T, typename Compare, typename Alloc>
+struct __CategoryTraits<set<T, Compare, Alloc>>
 {
     typedef __SetContainerTag __Category;
 };
 
 
-template <typename T>
-struct __CategoryTraits<multiset<T>>
+template <typename T, typename Compare, typename Alloc>
+struct __CategoryTraits<multiset<T, Compare, Alloc>>
 {
     typedef __SetContainerTag __Category;
 };
 
 
-template <typename T>
-struct __CategoryTraits<unordered_set<T>>
+template <typename T, typename Hash, typename Pred, typename Alloc>
+struct __CategoryTraits<unordered_set<T, Hash, Pred, Alloc>>
 {
     typedef __SetContainerTag __Category;
 };
 
 
-template <typename T>
-struct __CategoryTraits<unordered_multiset<T>>
+template <typename T, typename Hash, typename Pred, typename Alloc>
+struct __CategoryTraits<unordered_multiset<T, Hash, Pred, Alloc>>
 {
     typedef __SetContainerTag __Category;
 };
@@ -166,22 +166,22 @@ struct __CategoryTraits<tuple<Types...>>
 };
 
 
-template <typename T>
-struct __CategoryTraits<stack<T>>
+template <typename T, typename Container>
+struct __CategoryTraits<stack<T, Container>>
 {
     typedef __StackTag __Category;
 };
 
 
-template <typename T>
-struct __CategoryTraits<queue<T>>
+template <typename T, typename Container>
+struct __CategoryTraits<queue<T, Container>>
 {
     typedef __QueueTag __Category;
 };
 
 
-template <typename T>
-struct __CategoryTraits<priority_queue<T>>
+template <typename T, typename Container, typename Compare>
+struct __CategoryTraits<priority_queue<T, Container, Compare>>
 {
     typedef __StackTag __Category;
 };
