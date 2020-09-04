@@ -201,11 +201,11 @@ void __PrintData<__MapPairTag, SubTag, T, N>::__Print(const T &val)
 
     __PrintData<
 
-        typename __CategoryTraits<typename T::first_type>::__Category,
+        typename __CategoryTraits<typename remove_const<typename T::first_type>::type>::__Category,
 
         typename __SubCategoryTraits<
-            typename __CategoryTraits<typename T::first_type>::__Category,
-            typename T::first_type
+            typename __CategoryTraits<typename remove_const<typename T::first_type>::type>::__Category,
+            typename remove_const<typename T::first_type>::type
         >::__Category,
 
         typename T::first_type,

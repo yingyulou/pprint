@@ -7,6 +7,7 @@
 #ifndef __PPRINT_SUB_CATEGORY_TRAITS_H
 #define __PPRINT_SUB_CATEGORY_TRAITS_H
 
+#include <type_traits>
 #include <tuple>
 #include "CategoryTag.h"
 #include "CategoryTraits.h"
@@ -19,6 +20,7 @@ namespace pprint
 // Using
 ////////////////////////////////////////////////////////////////////////////////
 
+using std::remove_const;
 using std::tuple;
 
 
@@ -62,7 +64,7 @@ template <typename T>
 struct __SubCategoryTraits<__MapPairTag, T>
 {
     typedef typename __CategoryPromotionTraits<
-        typename __CategoryTraits<typename T::first_type>::__Category,
+        typename __CategoryTraits<typename remove_const<typename T::first_type>::type>::__Category,
         typename __CategoryTraits<typename T::second_type>::__Category
     >::__Category __Category;
 };
