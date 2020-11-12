@@ -27,8 +27,11 @@ using std::endl;
 // print
 ////////////////////////////////////////////////////////////////////////////////
 
-template <typename T>
-void print(const T &val)
+void print() {}
+
+
+template <typename T, typename... Types>
+void print(const T &val, const Types &... Args)
 {
     __PrintData<
 
@@ -46,6 +49,8 @@ void print(const T &val)
     >::__Print(val);
 
     cout << endl;
+
+    print(Args...);
 }
 
 
