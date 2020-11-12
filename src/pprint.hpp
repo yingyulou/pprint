@@ -8,6 +8,7 @@
 #define __PPRINT_PPRINT_HPP
 
 #include <iostream>
+#include <initializer_list>
 #include "CategoryTraits.h"
 #include "SubCategoryTraits.h"
 #include "PrintData.hpp"
@@ -21,6 +22,7 @@ namespace pprint
 
 using std::cout;
 using std::endl;
+using std::initializer_list;
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -51,6 +53,13 @@ void print(const T &val, const Types &... Args)
     cout << endl;
 
     print(Args...);
+}
+
+
+template <typename T, typename... Types>
+void print(initializer_list<T> &&val, const Types &... Args)
+{
+    print(val, Args...);
 }
 
 

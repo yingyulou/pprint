@@ -132,6 +132,20 @@ struct __PrintData<__QueueTag, __CommonTag, T, N>
 };
 
 
+template <typename SubTag, typename T, int N>
+struct __PrintData<__InitializerListTag, SubTag, T, N>
+{
+    static void __Print(const T &val);
+};
+
+
+template <typename T, int N>
+struct __PrintData<__InitializerListTag, __CommonTag, T, N>
+{
+    static void __Print(const T &val);
+};
+
+
 }  // End namespace pprint
 
 

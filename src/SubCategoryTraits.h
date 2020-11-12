@@ -103,6 +103,13 @@ struct __SubCategoryTraits<__QueueTag, T>
 };
 
 
+template <typename T>
+struct __SubCategoryTraits<__InitializerListTag, T>
+{
+    typedef typename __CategoryTraits<typename T::value_type>::__Category __Category;
+};
+
+
 }  // End namespace pprint
 
 

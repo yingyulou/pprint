@@ -20,6 +20,7 @@
 #include <tuple>
 #include <stack>
 #include <queue>
+#include <initializer_list>
 #include <cstddef>
 #include "CategoryTag.h"
 
@@ -48,6 +49,7 @@ using std::tuple;
 using std::stack;
 using std::queue;
 using std::priority_queue;
+using std::initializer_list;
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -184,6 +186,13 @@ template <typename T, typename Container, typename Compare>
 struct __CategoryTraits<priority_queue<T, Container, Compare>>
 {
     typedef __StackTag __Category;
+};
+
+
+template <typename T>
+struct __CategoryTraits<initializer_list<T>>
+{
+    typedef __InitializerListTag __Category;
 };
 
 

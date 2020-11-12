@@ -357,6 +357,46 @@ void __PrintData<__QueueTag, __CommonTag, T, N>::__Print(T val)
 }
 
 
+template <typename SubTag, typename T, int N>
+void __PrintData<__InitializerListTag, SubTag, T, N>::__Print(const T &val)
+{
+    cout << string(N * __INDENTATION_LEN, __SPACE) << __INITIALIZER_LIST_BEGIN << endl;
+
+    for (auto &subVal: val)
+    {
+        __PrintData<
+            SubTag,
+            typename __SubCategoryTraits<SubTag, typename T::value_type>::__Category,
+            typename T::value_type,
+            N + 1
+        >::__Print(subVal);
+
+        cout << __LINE_END << endl;
+    }
+
+    cout << string(N * __INDENTATION_LEN, __SPACE) << __INITIALIZER_LIST_END;
+}
+
+
+template <typename T, int N>
+void __PrintData<__InitializerListTag, __CommonTag, T, N>::__Print(const T &val)
+{
+    cout << string(N * __INDENTATION_LEN, __SPACE) << __INITIALIZER_LIST_BEGIN;
+
+    if (val.size())
+    {
+        cout << *val.begin();
+
+        for (auto iter = next(val.begin()); iter != val.end(); iter++)
+        {
+            cout << __VALUE_SPLICE << *iter;
+        }
+    }
+
+    cout << __INITIALIZER_LIST_END;
+}
+
+
 }  // End namespace pprint
 
 

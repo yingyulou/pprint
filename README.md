@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Pretty print any common data, containers, container adapters, pairs and tuples.
+Pretty print any common data, containers, container adapters, pairs, tuples and initializer_lists.
 
 To use this module, simply include the ```pprint``` herader file:
 
@@ -13,7 +13,7 @@ To use this module, simply include the ```pprint``` herader file:
 The only thing you need to do is call the function ```print``` like this:
 
 ``` Cpp
-pprint::print(xxx);
+pprint::print(xxx /* , xxx, xxx, ... */);
 ```
 
 Or import the namespace ```pprint``` then call the ```print```:
@@ -21,12 +21,12 @@ Or import the namespace ```pprint``` then call the ```print```:
 ``` Cpp
 using pprint::print;
 
-print(xxx);
+print(xxx /* , xxx, xxx, ... */);
 ```
 
 ## Common Data
 
-The ```Common Data``` is like: ```int```, ```double```, ```string```, ```pointer```, etc:
+The ```Common Data``` are like: ```int```, ```double```, ```string```, ```pointer```, etc:
 
 ``` Cpp
 int sampleInt = 123;
@@ -40,7 +40,7 @@ print(sampleStr);  // abc
 
 ## Sequence Container
 
-The ```Sequence Container``` is: ```array```, ```deque```, ```forward_list```, ```list``` and ```vector``` of the STL:
+The ```Sequence Container``` are: ```std::array```, ```std::deque```, ```std::forward_list```, ```std::list``` and ```std::vector``` of the STL:
 
 ``` Cpp
 array<int, 3> sampleArray {1, 2, 3};
@@ -67,7 +67,7 @@ print(sampleComplexContainer);
 
 ## Map Container
 
-The ```Map Container``` is: ```map```, ```multimap```, ```unordered_map``` and ```unordered_multimap``` of the STL:
+The ```Map Container``` are: ```std::map```, ```std::multimap```, ```std::unordered_map``` and ```std::unordered_multimap``` of the STL:
 
 ``` Cpp
 map<int, string> sampleMap {{1, "abc"}, {2, "def"}, {3, "ghi"}};
@@ -103,7 +103,7 @@ print(sampleComplexMap);
 
 ## Set Container
 
-The ```Set Container``` is: ```set```, ```multiset```, ```unordered_set``` and ```unordered_multiset``` of the STL:
+The ```Set Container``` are: ```std::set```, ```std::multiset```, ```std::unordered_set``` and ```std::unordered_multiset``` of the STL:
 
 ``` Cpp
 set<int> sampleSet {1, 2, 3};
@@ -123,7 +123,7 @@ print(sampleComplexSet);
 
 ## Pair
 
-The ```Pair``` is: ```pair``` of the STL:
+The ```Pair``` is: ```std::pair``` of the STL:
 
 ``` Cpp
 pair<int, string> samplePair {1, "abc"};
@@ -142,7 +142,7 @@ print(sampleComplexPair);
 
 ## Tuple
 
-The ```Tuple``` is: ```tuple``` of the STL:
+The ```Tuple``` is: ```std::tuple``` of the STL:
 
 ``` Cpp
 tuple<int, double, char, string> sampleTuple {1, 2., 'a', "abc"};
@@ -164,7 +164,7 @@ print(sampleComplexTuple);
 
 ## Stack
 
-The ```Stack``` is: ```stack``` of the STL:
+The ```Stack``` is: ```std::stack``` of the STL:
 
 ``` Cpp
 stack<int> sampleStack;
@@ -199,7 +199,7 @@ print(sampleComplexStack);
 
 ## Queue
 
-The ```Queue``` is: ```queue``` and ```priority_queue``` of the STL:
+The ```Queue``` are: ```std::queue``` and ```std::priority_queue``` of the STL:
 
 ``` Cpp
 queue<int> sampleQueue;
@@ -230,4 +230,20 @@ print(sampleQueue);
                   Back
 */
 print(sampleComplexPriorityQueue);
+```
+
+## Initializer List
+
+The ```Initializer List``` is: ```std::initializer_list``` of the STL:
+
+``` Cpp
+print({1, 2, 3});  // {1, 2, 3}
+
+/*
+{
+    [1, 2, 3],
+    [4, 5, 6],
+}
+*/
+print({list<int>{1, 2, 3}, list<int>{4, 5, 6}});
 ```

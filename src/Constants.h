@@ -45,6 +45,8 @@ const char   __STACK_BEGIN              = '[';
 const char   __STACK_END                = ']';
 const char   __QUEUE_BEGIN              = '[';
 const char   __QUEUE_END                = ']';
+const char   __INITIALIZER_LIST_BEGIN   = '{';
+const char   __INITIALIZER_LIST_END     = '}';
 
 
 }  // End namespace pprint

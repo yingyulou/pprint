@@ -23,6 +23,7 @@ struct __MapPairTag {};
 struct __TupleTag {};
 struct __StackTag {};
 struct __QueueTag {};
+struct __InitializerListTag {};
 
 
 }  // End namespace pprint
