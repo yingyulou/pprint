@@ -11,6 +11,7 @@
 #include <string>
 #include <tuple>
 #include <iterator>
+#include <type_traits>
 #include "PrintData.h"
 #include "CategoryTag.h"
 #include "CategoryTraits.h"
@@ -31,6 +32,8 @@ using std::endl;
 using std::string;
 using std::tuple_size;
 using std::next;
+using std::enable_if;
+using std::is_enum;
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -38,9 +41,18 @@ using std::next;
 ////////////////////////////////////////////////////////////////////////////////
 
 template <typename T, int N>
-void __PrintData<__CommonTag, void, T, N>::__Print(const T &val)
+template <typename U>
+typename enable_if<!is_enum<U>::value>::type __PrintData<__CommonTag, void, T, N>::__Print(const U &val)
 {
     cout << string(N * __INDENTATION_LEN, __SPACE) << val;
+}
+
+
+template <typename T, int N>
+template <typename U>
+typename enable_if<is_enum<U>::value>::type __PrintData<__CommonTag, void, T, N>::__Print(const U &val)
+{
+    cout << string(N * __INDENTATION_LEN, __SPACE) << static_cast<int>(val);
 }
 
 
@@ -72,11 +84,23 @@ void __PrintData<__SequenceContainerTag, __CommonTag, T, N>::__Print(const T &va
 
     if (!val.empty())
     {
-        cout << val.front();
+        __PrintData<
+            __CommonTag,
+            void,
+            typename T::value_type,
+            0
+        >::__Print(val.front());
 
         for (auto iter = next(val.begin()); iter != val.end(); iter++)
         {
-            cout << __VALUE_SPLICE << *iter;
+            cout << __VALUE_SPLICE;
+
+            __PrintData<
+                __CommonTag,
+                void,
+                typename T::value_type,
+                0
+            >::__Print(*iter);
         }
     }
 
@@ -133,11 +157,23 @@ void __PrintData<__SetContainerTag, __CommonTag, T, N>::__Print(const T &val)
 
     if (!val.empty())
     {
-        cout << *val.begin();
+        __PrintData<
+            __CommonTag,
+            void,
+            typename T::value_type,
+            0
+        >::__Print(*val.begin());
 
         for (auto iter = next(val.begin()); iter != val.end(); iter++)
         {
-            cout << __VALUE_SPLICE << *iter;
+            cout << __VALUE_SPLICE;
+
+            __PrintData<
+                __CommonTag,
+                void,
+                typename T::value_type,
+                0
+            >::__Print(*iter);
         }
     }
 
@@ -189,8 +225,25 @@ void __PrintData<__PairTag, SubTag, T, N>::__Print(const T &val)
 template <typename T, int N>
 void __PrintData<__PairTag, __CommonTag, T, N>::__Print(const T &val)
 {
-    cout << string(N * __INDENTATION_LEN, __SPACE) << __PAIR_BEGIN <<
-        val.first << __VALUE_SPLICE << val.second << __PAIR_END;
+    cout << string(N * __INDENTATION_LEN, __SPACE) << __PAIR_BEGIN;
+
+    __PrintData<
+        __CommonTag,
+        void,
+        typename T::first_type,
+        0
+    >::__Print(val.first);
+
+    cout << __VALUE_SPLICE;
+
+    __PrintData<
+        __CommonTag,
+        void,
+        typename T::second_type,
+        0
+    >::__Print(val.second);
+
+    cout << __PAIR_END;
 }
 
 
@@ -238,8 +291,25 @@ void __PrintData<__MapPairTag, SubTag, T, N>::__Print(const T &val)
 template <typename T, int N>
 void __PrintData<__MapPairTag, __CommonTag, T, N>::__Print(const T &val)
 {
-    cout << string(N * __INDENTATION_LEN, __SPACE) << __MAP_PAIR_BEGIN <<
-        val.first << __MAP_PAIR_SPLICE << val.second << __MAP_PAIR_END;
+    cout << string(N * __INDENTATION_LEN, __SPACE) << __MAP_PAIR_BEGIN;
+
+    __PrintData<
+        __CommonTag,
+        void,
+        typename T::first_type,
+        0
+    >::__Print(val.first);
+
+    cout << __MAP_PAIR_SPLICE;
+
+    __PrintData<
+        __CommonTag,
+        void,
+        typename T::second_type,
+        0
+    >::__Print(val.second);
+
+    cout << __MAP_PAIR_END;
 }
 
 
@@ -299,12 +369,26 @@ void __PrintData<__StackTag, __CommonTag, T, N>::__Print(const T &val)
 
     if (!reverseVal.empty())
     {
-        cout << reverseVal.top();
+        __PrintData<
+            __CommonTag,
+            void,
+            typename T::value_type,
+            0
+        >::__Print(reverseVal.top());
+
         reverseVal.pop();
 
         while (!reverseVal.empty())
         {
-            cout << __VALUE_SPLICE << reverseVal.top();
+            cout << __VALUE_SPLICE;
+
+            __PrintData<
+                __CommonTag,
+                void,
+                typename T::value_type,
+                0
+            >::__Print(reverseVal.top());
+
             reverseVal.pop();
         }
     }
@@ -343,12 +427,26 @@ void __PrintData<__QueueTag, __CommonTag, T, N>::__Print(T val)
 
     if (!val.empty())
     {
-        cout << val.front();
+        __PrintData<
+            __CommonTag,
+            void,
+            typename T::value_type,
+            0
+        >::__Print(val.front());
+
         val.pop();
 
         while (!val.empty())
         {
-            cout << __VALUE_SPLICE << val.front();
+            cout << __VALUE_SPLICE;
+
+            __PrintData<
+                __CommonTag,
+                void,
+                typename T::value_type,
+                0
+            >::__Print(val.front());
+
             val.pop();
         }
     }
@@ -385,11 +483,23 @@ void __PrintData<__InitializerListTag, __CommonTag, T, N>::__Print(const T &val)
 
     if (val.size())
     {
-        cout << *val.begin();
+        __PrintData<
+            __CommonTag,
+            void,
+            typename T::value_type,
+            0
+        >::__Print(*val.begin());
 
         for (auto iter = next(val.begin()); iter != val.end(); iter++)
         {
-            cout << __VALUE_SPLICE << *iter;
+            cout << __VALUE_SPLICE;
+
+            __PrintData<
+                __CommonTag,
+                void,
+                typename T::value_type,
+                0
+            >::__Print(*iter);
         }
     }
 

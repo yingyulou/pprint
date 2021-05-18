@@ -7,10 +7,19 @@
 #ifndef __PPRINT_PRINT_DATA_H
 #define __PPRINT_PRINT_DATA_H
 
+#include <type_traits>
 #include "CategoryTag.h"
 
 namespace pprint
 {
+
+////////////////////////////////////////////////////////////////////////////////
+// Using
+////////////////////////////////////////////////////////////////////////////////
+
+using std::enable_if;
+using std::is_enum;
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class __PrintData
@@ -23,7 +32,12 @@ struct __PrintData;
 template <typename T, int N>
 struct __PrintData<__CommonTag, void, T, N>
 {
-    static void __Print(const T &val);
+    template <typename U>
+    static typename enable_if<!is_enum<U>::value>::type __Print(const U &val);
+
+
+    template <typename U>
+    static typename enable_if<is_enum<U>::value>::type __Print(const U &val);
 };
 
 
