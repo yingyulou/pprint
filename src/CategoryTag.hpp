@@ -1,11 +1,11 @@
 /*
-    CategoryTag.h
-    =============
-        Category tags header.
+    CategoryTag.hpp
+    ===============
+        Category tags.
 */
 
-#ifndef __PPRINT_CATEGORY_TAG_H
-#define __PPRINT_CATEGORY_TAG_H
+#ifndef __PPRINT_CATEGORY_TAG_HPP
+#define __PPRINT_CATEGORY_TAG_HPP
 
 namespace pprint
 {
@@ -29,4 +29,4 @@ struct __InitializerListTag {};
 }  // End namespace pprint
 
 
-#endif  // __PPRINT_CATEGORY_TAG_H
+#endif  // __PPRINT_CATEGORY_TAG_HPP

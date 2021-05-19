@@ -1,17 +1,17 @@
 /*
-    pprint.hpp
-    ==========
-        print function implementation.
+    Print.hpp
+    =========
+        Function print implementation.
 */
 
-#ifndef __PPRINT_PPRINT_HPP
-#define __PPRINT_PPRINT_HPP
+#ifndef __PPRINT_PRINT_HPP
+#define __PPRINT_PRINT_HPP
 
 #include <iostream>
 #include <initializer_list>
 #include "CategoryTraits.h"
 #include "SubCategoryTraits.h"
-#include "PrintData.hpp"
+#include "PrintData.h"
 
 namespace pprint
 {
@@ -66,4 +66,4 @@ void print(initializer_list<T> &&val, const Types &... Args)
 }  // End namespace pprint
 
 
-#endif  // __PPRINT_PPRINT_HPP
+#endif  // __PPRINT_PRINT_HPP

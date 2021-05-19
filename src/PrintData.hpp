@@ -13,11 +13,11 @@
 #include <iterator>
 #include <type_traits>
 #include "PrintData.h"
-#include "CategoryTag.h"
+#include "CategoryTag.hpp"
 #include "CategoryTraits.h"
 #include "SubCategoryTraits.h"
-#include "PrintTuple.hpp"
-#include "Util.h"
+#include "PrintTuple.h"
+#include "Util.hpp"
 #include "Constants.h"
 
 namespace pprint
@@ -34,6 +34,7 @@ using std::tuple_size;
 using std::next;
 using std::enable_if;
 using std::is_enum;
+using std::is_convertible;
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -42,17 +43,42 @@ using std::is_enum;
 
 template <typename T, int N>
 template <typename U>
-typename enable_if<!is_enum<U>::value>::type __PrintData<__CommonTag, void, T, N>::__Print(const U &val)
+typename enable_if<is_enum<U>::value>::type
+__PrintData<__CommonTag, void, T, N>::__Print(const U &val)
 {
-    cout << string(N * __INDENTATION_LEN, __SPACE) << val;
+    cout << string(N * __INDENTATION_LEN, __SPACE) << typeid(val).name() <<  "::" << static_cast<int>(val);
 }
 
 
 template <typename T, int N>
 template <typename U>
-typename enable_if<is_enum<U>::value>::type __PrintData<__CommonTag, void, T, N>::__Print(const U &val)
+typename enable_if<is_convertible<U, string>::value>::type
+__PrintData<__CommonTag, void, T, N>::__Print(const U &val)
 {
-    cout << string(N * __INDENTATION_LEN, __SPACE) << static_cast<int>(val);
+    cout << string(N * __INDENTATION_LEN, __SPACE) << __STRING_BEGIN << val << __STRING_END;
+}
+
+
+template <typename T, int N>
+template <typename U>
+typename enable_if<!is_enum<U>::value && !is_convertible<U, string>::value>::type
+__PrintData<__CommonTag, void, T, N>::__Print(const U &val)
+{
+    cout << string(N * __INDENTATION_LEN, __SPACE) << val;
+}
+
+
+template <int N>
+void __PrintData<__CommonTag, void, bool, N>::__Print(bool val)
+{
+    cout << string(N * __INDENTATION_LEN, __SPACE) << (val ? __BOOL_TRUE : __BOOL_FALSE);
+}
+
+
+template <int N>
+void __PrintData<__CommonTag, void, char, N>::__Print(char val)
+{
+    cout << string(N * __INDENTATION_LEN, __SPACE) << __CHAR_BEGIN << val << __CHAR_END;
 }
 
 
@@ -61,7 +87,7 @@ void __PrintData<__SequenceContainerTag, SubTag, T, N>::__Print(const T &val)
 {
     cout << string(N * __INDENTATION_LEN, __SPACE) << __SEQUENCE_CONTAINER_BEGIN << endl;
 
-    for (auto &subVal: val)
+    for (const auto &subVal: val)
     {
         __PrintData<
             SubTag,
@@ -113,7 +139,7 @@ void __PrintData<__MapContainerTag, __MapPairTag, T, N>::__Print(const T &val)
 {
     cout << string(N * __INDENTATION_LEN, __SPACE) << __MAP_CONTAINER_BEGIN << endl;
 
-    for (auto &subVal: val)
+    for (const auto &subVal: val)
     {
         __PrintData<
             __MapPairTag,
@@ -134,7 +160,7 @@ void __PrintData<__SetContainerTag, SubTag, T, N>::__Print(const T &val)
 {
     cout << string(N * __INDENTATION_LEN, __SPACE) << __SET_CONTAINER_BEGIN << endl;
 
-    for (auto &subVal: val)
+    for (const auto &subVal: val)
     {
         __PrintData<
             SubTag,
@@ -460,7 +486,7 @@ void __PrintData<__InitializerListTag, SubTag, T, N>::__Print(const T &val)
 {
     cout << string(N * __INDENTATION_LEN, __SPACE) << __INITIALIZER_LIST_BEGIN << endl;
 
-    for (auto &subVal: val)
+    for (const auto &subVal: val)
     {
         __PrintData<
             SubTag,

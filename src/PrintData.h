@@ -7,8 +7,9 @@
 #ifndef __PPRINT_PRINT_DATA_H
 #define __PPRINT_PRINT_DATA_H
 
+#include <string>
 #include <type_traits>
-#include "CategoryTag.h"
+#include "CategoryTag.hpp"
 
 namespace pprint
 {
@@ -17,8 +18,10 @@ namespace pprint
 // Using
 ////////////////////////////////////////////////////////////////////////////////
 
+using std::string;
 using std::enable_if;
 using std::is_enum;
+using std::is_convertible;
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -33,11 +36,29 @@ template <typename T, int N>
 struct __PrintData<__CommonTag, void, T, N>
 {
     template <typename U>
-    static typename enable_if<!is_enum<U>::value>::type __Print(const U &val);
+    static typename enable_if<is_enum<U>::value>::type __Print(const U &val);
 
 
     template <typename U>
-    static typename enable_if<is_enum<U>::value>::type __Print(const U &val);
+    static typename enable_if<is_convertible<U, string>::value>::type __Print(const U &val);
+
+
+    template <typename U>
+    static typename enable_if<!is_enum<U>::value && !is_convertible<U, string>::value>::type __Print(const U &val);
+};
+
+
+template <int N>
+struct __PrintData<__CommonTag, void, bool, N>
+{
+    static void __Print(bool val);
+};
+
+
+template <int N>
+struct __PrintData<__CommonTag, void, char, N>
+{
+    static void __Print(char val);
 };
 
 

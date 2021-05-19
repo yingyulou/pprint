@@ -22,7 +22,7 @@
 #include <queue>
 #include <initializer_list>
 #include <cstddef>
-#include "CategoryTag.h"
+#include "CategoryTag.hpp"
 
 namespace pprint
 {

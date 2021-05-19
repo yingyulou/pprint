@@ -26,16 +26,26 @@ print(xxx /* , xxx, xxx, ... */);
 
 ## Common Data
 
-The ```Common Data``` are like: ```int```, ```double```, ```string```, ```pointer```, etc:
+The ```Common Data``` are like: ```int```, ```double```, ```char```, ```string```, ```pointer```, ```bool```, ```enum```, etc:
 
 ``` Cpp
-int sampleInt = 123;
-double *samplePtr = nullptr;
-string sampleStr = "abc";
+enum class COLOR { RED, GREEN, BLUE };
 
-print(sampleInt);  // 123
-print(samplePtr);  // 0
-print(sampleStr);  // abc
+int sampleInt       = 123;
+double sampleDouble = 123.;
+char sampleChar     = 'a';
+string sampleStr    = "abc";
+int *samplePtr      = nullptr;
+bool sampleBool     = false;
+COLOR sampleEnum    = COLOR::RED;
+
+print(sampleInt);     // 123
+print(sampleDouble);  // 123
+print(sampleChar);    // 'a'
+print(sampleStr);     // "abc"
+print(samplePtr);     // 0
+print(sampleBool);    // false
+print(sampleEnum);    // 5COLOR::0
 ```
 
 ## Sequence Container
@@ -48,17 +58,17 @@ vector<string> sampleVector {"abc", "def", "ghi"};
 list<deque<forward_list<string>>> sampleComplexContainer {{{"abc", "def"}, {"ghi", "jkl"}}, {{"mno", "pqr"}, {"stu", "vwx"}}};
 
 print(sampleArray);   // [1, 2, 3]
-print(sampleVector);  // [abc, def, ghi]
+print(sampleVector);  // ["abc", "def", "ghi"]
 
 /*
 [
     [
-        [abc, def],
-        [ghi, jkl],
+        ["abc", "def"],
+        ["ghi", "jkl"],
     ],
     [
-        [mno, pqr],
-        [stu, vwx],
+        ["mno", "pqr"],
+        ["stu", "vwx"],
     ],
 ]
 */
@@ -75,9 +85,9 @@ multimap<int, vector<string>> sampleComplexMap {{1, {"abc", "def"}}, {2, {"ghi",
 
 /*
 {
-    (1: abc),
-    (2: def),
-    (3: ghi),
+    (1: "abc"),
+    (2: "def"),
+    (3: "ghi"),
 }
 */
 print(sampleMap);
@@ -86,15 +96,15 @@ print(sampleMap);
 {
     (
         1:
-        [abc, def],
+        ["abc", "def"],
     ),
     (
         2:
-        [ghi, jkl],
+        ["ghi", "jkl"],
     ),
     (
         3:
-        [mno, pqu],
+        ["mno", "pqu"],
     ),
 }
 */
@@ -113,9 +123,9 @@ print(sampleSet);  // {1, 2, 3}
 
 /*
 {
-    [0, 1],
-    [1, 0],
-    [1, 0, 0, 1],
+    [false, true],
+    [true, false],
+    [true, false, false, true],
 }
 */
 print(sampleComplexSet);
@@ -129,12 +139,12 @@ The ```Pair``` is: ```std::pair``` of the STL:
 pair<int, string> samplePair {1, "abc"};
 pair<int, vector<string>> sampleComplexPair {1, {"abc", "def", "ghi"}};
 
-print(samplePair);  // (1, abc)
+print(samplePair);  // (1, "abc")
 
 /*
 (
     1,
-    [abc, def, ghi],
+    ["abc", "def", "ghi"],
 )
 */
 print(sampleComplexPair);
@@ -148,15 +158,15 @@ The ```Tuple``` is: ```std::tuple``` of the STL:
 tuple<int, double, char, string> sampleTuple {1, 2., 'a', "abc"};
 tuple<int, double, char, string, vector<string>> sampleComplexTuple {1, 2., 'a', "abc", {"abc", "def", "ghi"}};
 
-print(sampleTuple);  // (1, 2, a, abc)
+print(sampleTuple);  // (1, 2, 'a', "abc")
 
 /*
 (
     1,
     2,
-    a,
-    abc,
-    [abc, def, ghi],
+    'a',
+    "abc",
+    ["abc", "def", "ghi"],
 )
 */
 print(sampleComplexTuple);
@@ -186,13 +196,13 @@ Bottom --------> Top
 print(sampleStack);
 
 /*
-                 Bottom
-[                  |
-    [abc, def],    |
-    [ghi, jkl],    |
-    [mno, pqr],    |
-]                  v
-                  Top
+                     Bottom
+[                      |
+    ["abc", "def"],    |
+    ["ghi", "jkl"],    |
+    ["mno", "pqr"],    |
+]                      v
+                      Top
 */
 print(sampleComplexStack);
 ```
@@ -221,13 +231,13 @@ Front <-------- Back
 print(sampleQueue);
 
 /*
-                 Front
-[                  ^
-    [mno, pqr],    |
-    [ghi, jkl],    |
-    [abc, def],    |
-]                  |
-                  Back
+                     Front
+[                      ^
+    ["mno", "pqr"],    |
+    ["ghi", "jkl"],    |
+    ["abc", "def"],    |
+]                      |
+                      Back
 */
 print(sampleComplexPriorityQueue);
 ```

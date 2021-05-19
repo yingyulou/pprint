@@ -35,7 +35,20 @@ using std::tuple_element;
 template <typename T, int Idx, int TopIdx>
 void __PrintTupleOneLine<T, Idx, TopIdx>::__Print(const T &val)
 {
-    cout << get<Idx>(val);
+    __PrintData<
+
+        typename __CategoryTraits<typename tuple_element<Idx, T>::type>::__Category,
+
+        typename __SubCategoryTraits<
+            typename __CategoryTraits<typename tuple_element<Idx, T>::type>::__Category,
+            typename tuple_element<Idx, T>::type
+        >::__Category,
+
+        typename tuple_element<Idx, T>::type,
+
+        0
+
+    >::__Print(get<Idx>(val));
 
     if (Idx + 1 < TopIdx)
     {
@@ -44,6 +57,10 @@ void __PrintTupleOneLine<T, Idx, TopIdx>::__Print(const T &val)
 
     __PrintTupleOneLine<T, Idx + 1, TopIdx>::__Print(val);
 }
+
+
+template <typename T, int TopIdx>
+void __PrintTupleOneLine<T, TopIdx, TopIdx>::__Print(const T &val) {}
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -72,6 +89,10 @@ void __PrintTupleMultiLine<T, N, Idx, TopIdx>::__Print(const T &val)
 
     __PrintTupleMultiLine<T, N, Idx + 1, TopIdx>::__Print(val);
 }
+
+
+template <typename T, int N, int TopIdx>
+void __PrintTupleMultiLine<T, N, TopIdx, TopIdx>::__Print(const T &val) {}
 
 
 }  // End namespace pprint

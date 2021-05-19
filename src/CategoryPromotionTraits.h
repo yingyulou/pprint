@@ -7,7 +7,7 @@
 #ifndef __PPRINT_CATEGORY_PROMOTION_TRAITS_H
 #define __PPRINT_CATEGORY_PROMOTION_TRAITS_H
 
-#include "CategoryTag.h"
+#include "CategoryTag.hpp"
 
 namespace pprint
 {

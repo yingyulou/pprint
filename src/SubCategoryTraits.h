@@ -9,7 +9,7 @@
 
 #include <type_traits>
 #include <tuple>
-#include "CategoryTag.h"
+#include "CategoryTag.hpp"
 #include "CategoryTraits.h"
 #include "CategoryPromotionTraits.h"
 
@@ -29,11 +29,7 @@ using std::tuple;
 ////////////////////////////////////////////////////////////////////////////////
 
 template <typename Tag, typename T>
-struct __SubCategoryTraits;
-
-
-template <typename T>
-struct __SubCategoryTraits<__CommonTag, T>
+struct __SubCategoryTraits
 {
     typedef void __Category;
 };

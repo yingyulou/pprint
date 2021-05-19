@@ -1,11 +1,11 @@
 /*
-    Util.h
-    ======
-        Utility functions define.
+    Util.hpp
+    ========
+        Utility functions implementation.
 */
 
-#ifndef __PPRINT_UTIL_H
-#define __PPRINT_UTIL_H
+#ifndef __PPRINT_UTIL_HPP
+#define __PPRINT_UTIL_HPP
 
 namespace pprint
 {
@@ -32,4 +32,4 @@ T __reverseStack(T oriStack)
 }  // End namespace pprint
 
 
-#endif  // __PPRINT_UTIL_H
+#endif  // __PPRINT_UTIL_HPP
