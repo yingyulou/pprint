@@ -85,7 +85,8 @@ void __PrintTupleMultiLine<T, N, Idx, TopIdx>::__Print(const T &val)
 
     >::__Print(get<Idx>(val));
 
-    cout << __LINE_END << endl;
+    cout << __LINE_END
+         << endl;
 
     __PrintTupleMultiLine<T, N, Idx + 1, TopIdx>::__Print(val);
 }

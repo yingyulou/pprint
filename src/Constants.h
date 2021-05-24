@@ -27,6 +27,7 @@ const char   __SPACE                    = ' ';
 const int    __INDENTATION_LEN          = 4;
 const string __VALUE_SPLICE             = ", ";
 const char   __LINE_END                 = ',';
+const string __TYPE_SEP                 = "::";
 const char   __STRING_BEGIN             = '"';
 const char   __STRING_END               = '"';
 const string __BOOL_TRUE                = "true";
