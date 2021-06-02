@@ -4,8 +4,7 @@
         Category traits header.
 */
 
-#ifndef __PPRINT_CATEGORY_TRAITS_H
-#define __PPRINT_CATEGORY_TRAITS_H
+#pragma once
 
 #include <array>
 #include <deque>
@@ -197,6 +196,3 @@ struct __CategoryTraits<initializer_list<T>>
 
 
 }  // End namespace pprint
-
-
-#endif  // __PPRINT_CATEGORY_TRAITS_H

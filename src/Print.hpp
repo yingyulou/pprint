@@ -4,8 +4,7 @@
         Function print implementation.
 */
 
-#ifndef __PPRINT_PRINT_HPP
-#define __PPRINT_PRINT_HPP
+#pragma once
 
 #include <iostream>
 #include <initializer_list>
@@ -64,6 +63,3 @@ void print(initializer_list<T> &&val, const Types &... Args)
 
 
 }  // End namespace pprint
-
-
-#endif  // __PPRINT_PRINT_HPP

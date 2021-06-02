@@ -4,8 +4,7 @@
         Class __PrintData header.
 */
 
-#ifndef __PPRINT_PRINT_DATA_H
-#define __PPRINT_PRINT_DATA_H
+#pragma once
 
 #include <string>
 #include <type_traits>
@@ -182,6 +181,3 @@ struct __PrintData<__InitializerListTag, __CommonTag, T, N>
 
 
 }  // End namespace pprint
-
-
-#endif  // __PPRINT_PRINT_DATA_H

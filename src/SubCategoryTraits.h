@@ -4,8 +4,7 @@
         Sub category traits header.
 */
 
-#ifndef __PPRINT_SUB_CATEGORY_TRAITS_H
-#define __PPRINT_SUB_CATEGORY_TRAITS_H
+#pragma once
 
 #include <type_traits>
 #include <tuple>
@@ -107,6 +106,3 @@ struct __SubCategoryTraits<__InitializerListTag, T>
 
 
 }  // End namespace pprint
-
-
-#endif  // __PPRINT_SUB_CATEGORY_TRAITS_H

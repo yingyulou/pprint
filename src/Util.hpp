@@ -4,8 +4,7 @@
         Utility functions implementation.
 */
 
-#ifndef __PPRINT_UTIL_HPP
-#define __PPRINT_UTIL_HPP
+#pragma once
 
 namespace pprint
 {
@@ -30,6 +29,3 @@ T __reverseStack(T oriStack)
 
 
 }  // End namespace pprint
-
-
-#endif  // __PPRINT_UTIL_HPP

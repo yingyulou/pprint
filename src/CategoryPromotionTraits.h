@@ -4,8 +4,7 @@
         Upgrade category traits header.
 */
 
-#ifndef __PPRINT_CATEGORY_PROMOTION_TRAITS_H
-#define __PPRINT_CATEGORY_PROMOTION_TRAITS_H
+#pragma once
 
 #include "CategoryTag.hpp"
 
@@ -59,6 +58,3 @@ struct __CategoryPromotionTraits<Tag1, Tags...>
 
 
 }  // End namespace pprint
-
-
-#endif  // __PPRINT_CATEGORY_PROMOTION_TRAITS_H

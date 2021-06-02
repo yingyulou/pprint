@@ -4,8 +4,7 @@
         Class __PrintData implementation.
 */
 
-#ifndef __PPRINT_PRINT_DATA_HPP
-#define __PPRINT_PRINT_DATA_HPP
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -591,6 +590,3 @@ void __PrintData<__InitializerListTag, __CommonTag, T, N>::__Print(const T &val)
 
 
 }  // End namespace pprint
-
-
-#endif  // __PPRINT_PRINT_DATA_HPP

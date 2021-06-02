@@ -4,8 +4,7 @@
         Category tags.
 */
 
-#ifndef __PPRINT_CATEGORY_TAG_HPP
-#define __PPRINT_CATEGORY_TAG_HPP
+#pragma once
 
 namespace pprint
 {
@@ -27,6 +26,3 @@ struct __InitializerListTag {};
 
 
 }  // End namespace pprint
-
-
-#endif  // __PPRINT_CATEGORY_TAG_HPP

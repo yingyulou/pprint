@@ -4,8 +4,7 @@
         Class __PrintTupleOneLine and __PrintTupleMultiLine implementation.
 */
 
-#ifndef __PPRINT_PRINT_TUPLE_HPP
-#define __PPRINT_PRINT_TUPLE_HPP
+#pragma once
 
 #include <iostream>
 #include <tuple>
@@ -97,6 +96,3 @@ void __PrintTupleMultiLine<T, N, TopIdx, TopIdx>::__Print(const T &val) {}
 
 
 }  // End namespace pprint
-
-
-#endif  // __PPRINT_PRINT_TUPLE_HPP

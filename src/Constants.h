@@ -4,8 +4,7 @@
         Constants define.
 */
 
-#ifndef __PPRINT_CONSTANTS_H
-#define __PPRINT_CONSTANTS_H
+#pragma once
 
 #include <string>
 
@@ -57,6 +56,3 @@ const char   __INITIALIZER_LIST_END     = '}';
 
 
 }  // End namespace pprint
-
-
-#endif  // __PPRINT_CONSTANTS_H

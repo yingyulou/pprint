@@ -4,8 +4,7 @@
         Class __PrintTupleOneLine and __PrintTupleMultiLine header.
 */
 
-#ifndef __PPRINT_PRINT_TUPLE_H
-#define __PPRINT_PRINT_TUPLE_H
+#pragma once
 
 namespace pprint
 {
@@ -47,6 +46,3 @@ struct __PrintTupleMultiLine<T, N, TopIdx, TopIdx>
 
 
 }  // End namespace pprint
-
-
-#endif  // __PPRINT_PRINT_TUPLE_H
