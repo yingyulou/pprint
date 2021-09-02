@@ -4,12 +4,4 @@
     Pretty print any data, containers, pairs and tuples.
 */
 
-#include "src/CategoryTag.hpp"
-#include "src/CategoryTraits.h"
-#include "src/CategoryPromotionTraits.h"
-#include "src/SubCategoryTraits.h"
-#include "src/PrintTuple.hpp"
-#include "src/PrintData.hpp"
-#include "src/Util.hpp"
-#include "src/Constants.h"
-#include "src/Print.hpp"
+#include "src/pprint.hpp"
