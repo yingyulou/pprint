@@ -16,7 +16,10 @@ namespace pprint
 ////////////////////////////////////////////////////////////////////////////////
 
 template <typename... Tags>
-struct __CategoryPromotionTraits;
+struct __CategoryPromotionTraits
+{
+    typedef __CommonTag __Category;
+};
 
 
 template <typename Tag1, typename Tag2>
