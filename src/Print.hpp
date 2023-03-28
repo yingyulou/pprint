@@ -1,16 +1,15 @@
 /*
     Print.hpp
     =========
-        Function print implementation.
+        Print function implementation.
 */
 
 #pragma once
 
 #include <iostream>
-#include <initializer_list>
-#include "CategoryTraits.h"
-#include "SubCategoryTraits.h"
-#include "PrintData.h"
+#include <type_traits>
+#include "PrintTraits.h"
+#include "TypeTraits.hpp"
 
 namespace pprint
 {
@@ -20,45 +19,33 @@ namespace pprint
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 using std::cout;
-using std::endl;
-using std::initializer_list;
+using std::is_same_v;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// print
+// Print
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void print() {}
 
 
-template <typename T, typename... Types>
-void print(const T &val, const Types &... Args)
+template <typename T, typename... Ts>
+void print(const T &val, const Ts &... vals)
 {
-    __PrintData<
+    if constexpr (is_same_v<__MergeCategory<__Category<T>, __Category<Ts>...>, __CommonTag>)
+    {
+        __PrintTraits::__print<0>(val);
 
-        typename __CategoryTraits<T>::__Category,
+        (__PrintTraits::__print<0>(vals, " "), ...);
 
-        typename __SubCategoryTraits<
-            typename __CategoryTraits<T>::__Category,
-            T
-        >::__Category,
+        cout << "\n";
+    }
+    else
+    {
+        __PrintTraits::__print<0>(val, "", "\n");
 
-        T,
-
-        0
-
-    >::__Print(val);
-
-    cout << endl;
-
-    print(Args...);
-}
-
-
-template <typename T, typename... Types>
-void print(initializer_list<T> &&val, const Types &... Args)
-{
-    print(val, Args...);
+        (__PrintTraits::__print<0>(vals, "", "\n"), ...);
+    }
 }
 
 

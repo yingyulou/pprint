@@ -2,23 +2,23 @@
 
 ## Introduction
 
-Pretty print any common data, containers, container adapters, pairs, tuples and initializer_lists.
+Pretty print any data, containers, pairs and tuples.
 
-To use this module, simply include the ```pprint``` herader file:
+To use this module, simply include the `pprint` herader file:
 
-``` Cpp
+```cpp
 #include <pprint/pprint>
 ```
 
-The only thing you need to do is call the function ```print``` like this:
+The only thing you need to do is call the function `print` like this:
 
-``` Cpp
+```cpp
 pprint::print(xxx /* , xxx, xxx, ... */);
 ```
 
-Or import the namespace ```pprint``` then call the ```print```:
+Or using the namespace `pprint` then call the `print`:
 
-``` Cpp
+```cpp
 using pprint::print;
 
 print(xxx /* , xxx, xxx, ... */);
@@ -26,9 +26,9 @@ print(xxx /* , xxx, xxx, ... */);
 
 ## Common Data
 
-The ```Common Data``` are like: ```int```, ```double```, ```char```, ```string```, ```pointer```, ```bool```, ```enum```, etc:
+Common data, include: `int`, `double`, `char`, `string`, `pointer`, `bool`, `enum` and etc can be print:
 
-``` Cpp
+```cpp
 enum class COLOR { RED, GREEN, BLUE };
 
 int sampleInt       = 123;
@@ -45,19 +45,19 @@ print(sampleChar);    // 'a'
 print(sampleStr);     // "abc"
 print(samplePtr);     // 0
 print(sampleBool);    // false
-print(sampleEnum);    // 5COLOR::0
+print(sampleEnum);    // COLOR::0
 ```
 
 ## Sequence Container
 
-The ```Sequence Container``` are: ```std::array```, ```std::deque```, ```std::forward_list```, ```std::list``` and ```std::vector``` of the STL:
+Sequence container, include: `std::array`, `std::vector`, `std::list`, `std::forward_list`, and `std::deque` can be print:
 
-``` Cpp
+```cpp
 array<int, 3> sampleArray {1, 2, 3};
 vector<string> sampleVector {"abc", "def", "ghi"};
-list<deque<forward_list<string>>> sampleComplexContainer {{{"abc", "def"}, {"ghi", "jkl"}}, {{"mno", "pqr"}, {"stu", "vwx"}}};
+list<forward_list<deque<string>>> sampleComplexContainer {{{"abc", "def"}, {"ghi", "jkl"}}, {{"mno", "pqr"}, {"stu", "vwx"}}};
 
-print(sampleArray);   // [1, 2, 3]
+print(sampleArray);   // (1, 2, 3)
 print(sampleVector);  // ["abc", "def", "ghi"]
 
 /*
@@ -77,34 +77,53 @@ print(sampleComplexContainer);
 
 ## Map Container
 
-The ```Map Container``` are: ```std::map```, ```std::multimap```, ```std::unordered_map``` and ```std::unordered_multimap``` of the STL:
+Map container, include: `std::map`, `std::multimap`, `std::unordered_map` and `std::unordered_multimap` can ba print:
 
-``` Cpp
-map<int, string> sampleMap {{1, "abc"}, {2, "def"}, {3, "ghi"}};
-multimap<int, vector<string>> sampleComplexMap {{1, {"abc", "def"}}, {2, {"ghi", "jkl"}}, {3, {"mno", "pqu"}}};
+```cpp
+unordered_map<int, string> sampleMap {{1, "abc"}, {2, "def"}, {3, "ghi"}};
+unordered_multimap<int, string> sampleMultiMap {{1, "abc"}, {2, "def"}, {3, "ghi"}};
+map<int, multimap<int, int>> sampleComplexMap {{1, {{2, 2}, {3, 3}}}, {4, {{5, 5}, {6, 6}}}, {7, {{8, 8}, {9, 9}}}};
 
 /*
 {
-    (1: "abc"),
-    (2: "def"),
-    (3: "ghi"),
+    (3, "ghi"),
+    (2, "def"),
+    (1, "abc"),
 }
 */
 print(sampleMap);
 
 /*
 {
+    (3, "ghi"),
+    (2, "def"),
+    (1, "abc"),
+}
+*/
+print(sampleMultiMap);
+
+/*
+{
     (
-        1:
-        ["abc", "def"],
+        1,
+        {
+            (2, 2),
+            (3, 3),
+        },
     ),
     (
-        2:
-        ["ghi", "jkl"],
+        4,
+        {
+            (5, 5),
+            (6, 6),
+        },
     ),
     (
-        3:
-        ["mno", "pqu"],
+        7,
+        {
+            (8, 8),
+            (9, 9),
+        },
     ),
 }
 */
@@ -113,19 +132,20 @@ print(sampleComplexMap);
 
 ## Set Container
 
-The ```Set Container``` are: ```std::set```, ```std::multiset```, ```std::unordered_set``` and ```std::unordered_multiset``` of the STL:
+Set container, include: `std::set`, `std::multiset`, `std::unordered_set`, and `std::unordered_multiset` can be print:
 
-``` Cpp
-set<int> sampleSet {1, 2, 3};
-multiset<vector<bool>> sampleComplexSet {{true, false}, {false, true}, {true, false, false, true}};
+```cpp
+unordered_set<int> sampleSet {1, 2, 3};
+unordered_multiset<int> sampleMultiSet {1, 2, 3};
+set<multiset<bool>> sampleComplexSet {{true, false}, {false, true}, {true, false, false, true}};
 
-print(sampleSet);  // {1, 2, 3}
+print(sampleSet);       // {3, 2, 1}
+print(sampleMultiSet);  // {3, 2, 1}
 
 /*
 {
-    [false, true],
-    [true, false],
-    [true, false, false, true],
+    {false, false, true, true},
+    {false, true},
 }
 */
 print(sampleComplexSet);
@@ -133,9 +153,9 @@ print(sampleComplexSet);
 
 ## Pair
 
-The ```Pair``` is: ```std::pair``` of the STL:
+`std::pair` can be print:
 
-``` Cpp
+```cpp
 pair<int, string> samplePair {1, "abc"};
 pair<int, vector<string>> sampleComplexPair {1, {"abc", "def", "ghi"}};
 
@@ -152,9 +172,9 @@ print(sampleComplexPair);
 
 ## Tuple
 
-The ```Tuple``` is: ```std::tuple``` of the STL:
+`std::tuple` can be print:
 
-``` Cpp
+```cpp
 tuple<int, double, char, string> sampleTuple {1, 2., 'a', "abc"};
 tuple<int, double, char, string, vector<string>> sampleComplexTuple {1, 2., 'a', "abc", {"abc", "def", "ghi"}};
 
@@ -174,9 +194,9 @@ print(sampleComplexTuple);
 
 ## Stack
 
-The ```Stack``` is: ```std::stack``` of the STL:
+`std::stack` can be print:
 
-``` Cpp
+```cpp
 stack<int> sampleStack;
 
 sampleStack.push(1);
@@ -190,8 +210,8 @@ sampleComplexStack.push({"ghi", "jkl"});
 sampleComplexStack.push({"mno", "pqr"});
 
 /*
-Bottom --------> Top
        [1, 2, 3]
+Bottom --------> Top
 */
 print(sampleStack);
 
@@ -209,9 +229,9 @@ print(sampleComplexStack);
 
 ## Queue
 
-The ```Queue``` are: ```std::queue``` and ```std::priority_queue``` of the STL:
+`std::queue` and `std::priority_queue` can be print:
 
-``` Cpp
+```cpp
 queue<int> sampleQueue;
 
 sampleQueue.push(1);
@@ -225,8 +245,8 @@ sampleComplexPriorityQueue.push({"ghi", "jkl"});
 sampleComplexPriorityQueue.push({"mno", "pqr"});
 
 /*
-Front <-------- Back
       [1, 2, 3]
+Front <-------- Back
 */
 print(sampleQueue);
 
@@ -242,18 +262,26 @@ print(sampleQueue);
 print(sampleComplexPriorityQueue);
 ```
 
-## Initializer List
+## Other
 
-The ```Initializer List``` is: ```std::initializer_list``` of the STL:
+Any other type which defined `cout << ...` operator can be print:
 
-``` Cpp
-print({1, 2, 3});  // {1, 2, 3}
+```cpp
+struct Coord { double x; double y; };
 
-/*
+ostream &operator<<(ostream &os, const Coord &coordObj)
 {
-    [1, 2, 3],
-    [4, 5, 6],
+    return os << coordObj.x << ", " << coordObj.y << endl;
 }
-*/
-print({list<int>{1, 2, 3}, list<int>{4, 5, 6}});
+
+print(Coord {2, 3});  // 2, 3
 ```
+
+Otherwise, print will use the default format: `<Typename, Pointer>`:
+
+```cpp
+struct Coord { double x; double y; };
+
+print(Coord {2, 3});  // <Coord, 0x...>
+```
+
