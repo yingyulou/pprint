@@ -267,19 +267,24 @@ print(sampleComplexPriorityQueue);
 Any other type which defined `cout << ...` operator can be print:
 
 ```cpp
+print(complex(1, 2), filesystem::path("6"));  // (1,2) "6"
+
 struct Coord { double x; double y; };
 
 ostream &operator<<(ostream &os, const Coord &coordObj)
 {
-    return os << coordObj.x << ", " << coordObj.y << endl;
+    return os << '(' << coordObj.x << ", " << coordObj.y << ")\n";
 }
 
-print(Coord {2, 3});  // 2, 3
+print(Coord {2, 3});  // (2, 3)
 ```
 
 Otherwise, print will use the default format: `<Typename, Pointer>`:
 
 ```cpp
+// <std::integer_sequence<unsigned long long, 0ull, 1ull, 2ull>, 0x...>
+print(index_sequence_for<int, double, string>());
+
 struct Coord { double x; double y; };
 
 print(Coord {2, 3});  // <Coord, 0x...>
