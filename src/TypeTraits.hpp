@@ -58,6 +58,8 @@ using std::priority_queue;
 using std::cout;
 using std::true_type;
 using std::false_type;
+using std::is_same_v;
+using std::conditional_t;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,133 +83,133 @@ struct __PriorityQueueTag {};
 template <typename T>
 struct __CategoryTraits
 {
-    typedef __CommonTag __type;
+    using __type = __CommonTag;
 };
 
 
 template <typename T, typename Allocator>
 struct __CategoryTraits<vector<T, Allocator>>
 {
-    typedef __SequenceTag __type;
+    using __type = __SequenceTag;
 };
 
 
 template <typename T, typename Allocator>
 struct __CategoryTraits<deque<T, Allocator>>
 {
-    typedef __SequenceTag __type;
+    using __type = __SequenceTag;
 };
 
 
 template <typename T, typename Allocator>
 struct __CategoryTraits<list<T, Allocator>>
 {
-    typedef __SequenceTag __type;
+    using __type = __SequenceTag;
 };
 
 
 template <typename T, typename Allocator>
 struct __CategoryTraits<forward_list<T, Allocator>>
 {
-    typedef __SequenceTag __type;
+    using __type = __SequenceTag;
 };
 
 
 template <typename Key, typename T, typename Compare, typename Allocator>
 struct __CategoryTraits<map<Key, T, Compare, Allocator>>
 {
-    typedef __MapTag __type;
+    using __type = __MapTag;
 };
 
 
 template <typename Key, typename T, typename Compare, typename Allocator>
 struct __CategoryTraits<multimap<Key, T, Compare, Allocator>>
 {
-    typedef __MapTag __type;
+    using __type = __MapTag;
 };
 
 
 template <typename Key, typename T, typename Hash, typename KeyEqual, typename Allocator>
 struct __CategoryTraits<unordered_map<Key, T, Hash, KeyEqual, Allocator>>
 {
-    typedef __MapTag __type;
+    using __type = __MapTag;
 };
 
 
 template <typename Key, typename T, typename Hash, typename KeyEqual, typename Allocator>
 struct __CategoryTraits<unordered_multimap<Key, T, Hash, KeyEqual, Allocator>>
 {
-    typedef __MapTag __type;
+    using __type = __MapTag;
 };
 
 
 template <typename Key, typename Compare, typename Allocator>
 struct __CategoryTraits<set<Key, Compare, Allocator>>
 {
-    typedef __SetTag __type;
+    using __type = __SetTag;
 };
 
 
 template <typename Key, typename Compare, typename Allocator>
 struct __CategoryTraits<multiset<Key, Compare, Allocator>>
 {
-    typedef __SetTag __type;
+    using __type = __SetTag;
 };
 
 
 template <typename Key, typename Hash, typename KeyEqual, typename Allocator>
 struct __CategoryTraits<unordered_set<Key, Hash, KeyEqual, Allocator>>
 {
-    typedef __SetTag __type;
+    using __type = __SetTag;
 };
 
 
 template <typename Key, typename Hash, typename KeyEqual, typename Allocator>
 struct __CategoryTraits<unordered_multiset<Key, Hash, KeyEqual, Allocator>>
 {
-    typedef __SetTag __type;
+    using __type = __SetTag;
 };
 
 
 template <typename ...Ts>
 struct __CategoryTraits<tuple<Ts...>>
 {
-    typedef __TupleTag __type;
+    using __type = __TupleTag;
 };
 
 
 template <typename T1, typename T2>
 struct __CategoryTraits<pair<T1, T2>>
 {
-    typedef __TupleTag __type;
+    using __type = __TupleTag;
 };
 
 
 template <typename T, size_t N>
 struct __CategoryTraits<array<T, N>>
 {
-    typedef __TupleTag __type;
+    using __type = __TupleTag;
 };
 
 
 template <typename T, typename Container>
 struct __CategoryTraits<stack<T, Container>>
 {
-    typedef __StackTag __type;
+    using __type = __StackTag;
 };
 
 
 template <typename T, typename Container>
 struct __CategoryTraits<queue<T, Container>>
 {
-    typedef __QueueTag __type;
+    using __type = __QueueTag;
 };
 
 
 template <typename T, typename Container, typename Compare>
 struct __CategoryTraits<priority_queue<T, Container, Compare>>
 {
-    typedef __PriorityQueueTag __type;
+    using __type = __PriorityQueueTag;
 };
 
 
@@ -216,104 +218,42 @@ using __Category = typename __CategoryTraits<T>::__type;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Merge Category Traits
+// Is Sub Common Traits
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template <typename...>
-struct __MergeCategoryTraits;
-
-
-template <>
-struct __MergeCategoryTraits<>
-{
-    typedef __CommonTag __type;
-};
-
-
 template <typename T>
-struct __MergeCategoryTraits<T>
+struct __isSubCommonTraits
 {
-    typedef T __type;
-};
-
-
-template <>
-struct __MergeCategoryTraits<__CommonTag, __CommonTag>
-{
-    typedef __CommonTag __type;
-};
-
-
-template <typename T>
-struct __MergeCategoryTraits<T, __CommonTag>
-{
-    typedef T __type;
-};
-
-
-template <typename T>
-struct __MergeCategoryTraits<__CommonTag, T>
-{
-    typedef T __type;
-};
-
-
-template <typename T, typename U>
-struct __MergeCategoryTraits<T, U>
-{
-    typedef T __type;
-};
-
-
-template <typename T, typename... Ts>
-struct __MergeCategoryTraits<T, Ts...>
-{
-    typedef typename __MergeCategoryTraits<T, typename __MergeCategoryTraits<Ts...>::__type>::__type __type;
-};
-
-
-template <typename... Ts>
-using __MergeCategory = typename __MergeCategoryTraits<Ts...>::__type;
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Sub Category Traits
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-template <typename T, typename>
-struct __SubCategoryTraits
-{
-    typedef __Category<typename T::value_type> __type;
-};
-
-
-template <typename T>
-struct __SubCategoryTraits<T, __CommonTag>
-{
-    typedef __CommonTag __type;
-};
-
-
-template <typename T>
-struct __SubCategoryTraits<T, __TupleTag>
-{
-    template <typename>
-    struct __TupleSubCategoryTraits;
-
-
     template <size_t... Is>
-    struct __TupleSubCategoryTraits<index_sequence<Is...>>
+    static constexpr bool __isSubCommonTupleHelper(index_sequence<Is...>)
     {
-        typedef __MergeCategory<__Category<tuple_element_t<Is, T>>...> __type;
-    };
+        return (is_same_v<__Category<tuple_element_t<Is, T>>, __CommonTag> && ...);
+    }
 
 
-    typedef typename __TupleSubCategoryTraits<make_index_sequence<tuple_size_v<T>>>::__type __type;
+    static constexpr bool __isSubCommon()
+    {
+        if constexpr (is_same_v<__Category<T>, __CommonTag>)
+        {
+            return true;
+        }
+        else if constexpr (is_same_v<__Category<T>, __TupleTag>)
+        {
+            return __isSubCommonTupleHelper(make_index_sequence<tuple_size_v<T>>());
+        }
+        else
+        {
+            return is_same_v<__Category<typename T::value_type>, __CommonTag>;
+        }
+    }
+
+
+    static constexpr bool __value = __isSubCommon();
 };
 
 
 template <typename T>
-using __SubCategory = typename __SubCategoryTraits<T, __Category<T>>::__type;
+constexpr bool __isSubCommon = __isSubCommonTraits<T>::__value;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -29,6 +29,7 @@ using std::get;
 using std::tuple_size_v;
 using std::index_sequence;
 using std::make_index_sequence;
+using std::underlying_type_t;
 using std::is_same_v;
 using std::is_convertible_v;
 using std::is_enum_v;
@@ -57,7 +58,7 @@ void __PrintTraits::__printCommon(const T &val)
     }
     else if constexpr (is_enum_v<T>)
     {
-        cout << __getTypeName(val) << "::" << (int)val;
+        cout << __getTypeName(val) << "::" << (underlying_type_t<T>)val;
     }
     else if constexpr (__isPrintable<T>)
     {
@@ -77,7 +78,7 @@ void __PrintTraits::__printCommon(const T &val)
 template <size_t N, typename T>
 void __PrintTraits::__printSequence(const T &val, const string &startStr, const string &endStr)
 {
-    if constexpr (is_same_v<__SubCategory<T>, __CommonTag>)
+    if constexpr (__isSubCommon<T>)
     {
         cout << string(N * 4, ' ') << startStr;
 
@@ -156,7 +157,7 @@ void __PrintTraits::__printTupleHelper(const T &val, index_sequence<Is...>, cons
 template <size_t N, typename T>
 void __PrintTraits::__printTuple(const T &val, const string &startStr, const string &endStr)
 {
-    if constexpr (is_same_v<__SubCategory<T>, __CommonTag>)
+    if constexpr (__isSubCommon<T>)
     {
         cout << string(N * 4, ' ') << startStr;
 
@@ -187,7 +188,7 @@ void __PrintTraits::__printTuple(const T &val, const string &startStr, const str
 template <size_t N, typename T>
 void __PrintTraits::__printStackHelper(T val, const string &startStr, const string &endStr)
 {
-    if constexpr (is_same_v<__SubCategory<T>, __CommonTag>)
+    if constexpr (__isSubCommon<T>)
     {
         cout << string(N * 4, ' ') << startStr;
 
@@ -236,7 +237,7 @@ void __PrintTraits::__printStack(const T &val, const string &startStr, const str
 template <size_t N, typename T>
 void __PrintTraits::__printQueue(T val, const string &startStr, const string &endStr)
 {
-    if constexpr (is_same_v<__SubCategory<T>, __CommonTag>)
+    if constexpr (__isSubCommon<T>)
     {
         cout << string(N * 4, ' ') << startStr;
 
